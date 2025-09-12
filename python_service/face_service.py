@@ -60,6 +60,7 @@ create_new_reference("images/payday.jpg", "Payday")
 create_new_reference("images/kepler.jpg", "Kepler")
 
 
+
 # FastAPI Service
 app = FastAPI(title="Face Recognition Service", version="1.0.0")
 
@@ -94,7 +95,7 @@ def execute(input: FaceInput):
             return {"status": "success", "data": {"match": False, "label": None}}
 
         # Boolean matches
-        matches = face_recognition.compare_faces(candidates, query_encoding, tolerance=0.7)
+        matches = face_recognition.compare_faces(candidates, query_encoding, tolerance=0.5)
 
         # Distances (lower = closer match)
         distances = face_recognition.face_distance(candidates, query_encoding)

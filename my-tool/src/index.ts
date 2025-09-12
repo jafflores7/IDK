@@ -44,7 +44,6 @@ const faceProxyTool = createTool<ProxyInput, ProxyConfig>({
     const url = `${config.python_url}/execute`;
 
     try {
-      // Enviar solo los campos que FastAPI espera
       const payload = {
         face_image: input.face_image,
         user_id: input.user_id,
@@ -61,9 +60,13 @@ const faceProxyTool = createTool<ProxyInput, ProxyConfig>({
       }
 
       const result = await response.json();
+
+      // 🔥 Print Python response for debugging/logging
+      console.log("🔎 Face verification result:", JSON.stringify(result, null, 2));
+
       return {
         status: 'success',
-        data: result,
+        data: result, // keep the Python response in your tool output
       };
     } catch (err) {
       console.error("Python service call failed:", err);
@@ -73,6 +76,7 @@ const faceProxyTool = createTool<ProxyInput, ProxyConfig>({
       };
     }
   },
+
 });
 
 // Start the tool server
